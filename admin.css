@@ -1,2 +1,152 @@
 /* Admin-only content tools. Responsive layout follows the supplied mobile screenshots. */
-.admin-dialog{width:min(920px,calc(100% - 24px));height:min(92dvh,1000px);max-height:92dvh;overflow:auto;border:1px solid #dfe3e9;border-radius:20px;padding:28px;box-shadow:0 20px 70px #0003}.admin-dialog::backdrop{background:#06102bcc}.admin-dialog form{min-height:100%;display:flex;flex-direction:column}.admin-dialog-close{align-self:flex-end;border:0;background:transparent;color:#697080;font-size:2rem;line-height:1;cursor:pointer}.admin-dialog h2{margin:0 0 24px;font-size:1.8rem}.admin-dialog-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:auto;padding-top:24px}.admin-dialog-actions button{min-width:130px}.admin-form-grid select{width:100%;padding:13px 15px;border:1px solid #d1d5dd;border-radius:10px;background:#fff;color:#10182f;font:inherit}.field-help{font-weight:400;color:#697080}.editor-image-preview{display:block;width:min(100%,320px);max-height:210px;object-fit:cover;border-radius:12px;background:#f0f2f7}.admin-icon-button:disabled,.admin-dialog button:disabled{opacity:.55;cursor:wait}.urgent-marker{display:inline-block;margin:0 0 7px;color:#c8323a;font-size:.88rem;font-weight:700}.admin-form input[type=file]{padding:10px}.admin-form input[type=checkbox]{width:20px;height:20px}@media(max-width:700px){.admin-dialog{width:100%;height:calc(100dvh - 20px);max-height:calc(100dvh - 20px);margin:10px 0 0;border-radius:18px 18px 0 0;padding:20px 18px env(safe-area-inset-bottom,18px)}.admin-dialog h2{font-size:1.55rem}.admin-dialog-actions{position:sticky;bottom:0;background:#fff;padding:14px 0 4px}.admin-dialog-actions button{flex:1;min-width:0}.admin-dialog-close{font-size:2.2rem}}
+.admin-dialog {
+  width: min(920px, calc(100% - 24px));
+  height: min(92dvh, 1000px);
+  max-height: 92dvh;
+  overflow: auto;
+  border: 1px solid #dfe3e9;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 70px #0003;
+}
+.admin-dialog::backdrop { background: #06102bcc; }
+.admin-dialog form {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.admin-dialog-close {
+  align-self: flex-end;
+  border: 0;
+  background: transparent;
+  color: #697080;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.admin-dialog h2 { margin: 0 0 24px; font-size: 1.8rem; }
+.admin-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.admin-dialog-actions button { min-width: 130px; }
+.admin-form-grid select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #d1d5dd;
+  border-radius: 10px;
+  background: #fff;
+  color: #10182f;
+  font: inherit;
+}
+.field-help { font-weight: 400; color: #697080; }
+.editor-image-preview,
+#image-preview {
+  display: block;
+  width: min(100%, 320px);
+  max-height: 210px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f0f2f7;
+}
+.admin-icon-button:disabled,
+.admin-dialog button:disabled { opacity: .55; cursor: wait; }
+.urgent-marker {
+  display: inline-block;
+  margin: 0 0 7px;
+  color: #c8323a;
+  font-size: .88rem;
+  font-weight: 700;
+}
+.admin-form input[type="file"] { padding: 10px; }
+.admin-form input[type="checkbox"] { width: 20px; height: 20px; }
+
+/* The article editor is generated dynamically; explicitly stack every field. */
+#content-form { width: 100%; min-width: 0; }
+#dialog-fields,
+#dialog-fields .admin-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+}
+#dialog-fields > .kicker { margin: 0; }
+#dialog-fields h2 { margin: 0 0 4px; }
+#dialog-fields label:not(.admin-check) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  line-height: 1.4;
+}
+#dialog-fields input:not([type="checkbox"]),
+#dialog-fields textarea,
+#dialog-fields select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+}
+#dialog-fields input:not([type="checkbox"]),
+#dialog-fields textarea {
+  padding: 13px 15px;
+  border: 1px solid #dfe3e9;
+  border-radius: 10px;
+  background: #fff;
+  color: #10182f;
+}
+#dialog-fields input:focus,
+#dialog-fields textarea:focus,
+#dialog-fields select:focus {
+  outline: 2px solid #153b9a;
+  outline-offset: 1px;
+}
+#dialog-fields textarea { min-height: 110px; resize: vertical; }
+#dialog-fields textarea[name="contenido"] { min-height: 220px; }
+#dialog-fields input[type="file"] { padding: 10px; }
+#dialog-fields label.admin-check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+#dialog-fields label.admin-check input[type="checkbox"] {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .admin-dialog {
+    width: 100%;
+    height: calc(100dvh - 20px);
+    max-height: calc(100dvh - 20px);
+    margin: 10px 0 0;
+    border-radius: 18px 18px 0 0;
+    padding: 20px 18px max(18px, env(safe-area-inset-bottom));
+  }
+  .admin-dialog h2 { font-size: 1.55rem; }
+  .admin-dialog-actions {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 14px 0 4px;
+  }
+  .admin-dialog-actions button { flex: 1; min-width: 0; }
+  .admin-dialog-close { font-size: 2.2rem; }
+  #dialog-fields { gap: 16px; }
+  #dialog-fields label { font-size: 1rem; }
+  #dialog-fields input:not([type="checkbox"]),
+  #dialog-fields textarea,
+  #dialog-fields select { font-size: 16px; }
+}
