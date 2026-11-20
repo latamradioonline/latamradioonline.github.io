@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LATAM Radio Online | La voz de América Latina</title>
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --royal-blue: #0a2f8a;
@@ -125,6 +125,19 @@
         </div>
     </header>
 
+    <script>
+  const SUPABASE_URL = "https://TU-PROYECTO.supabase.co";
+  const SUPABASE_ANON_KEY = "TU_ANON_PUBLIC_KEY";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+</script>
+
+</body>
+</html>
+
     <section class="hero" id="inicio">
         <div class="hero-inner">
             <div class="live-tag"><span class="live-dot"></span> EN VIVO</div>
@@ -142,3 +155,4 @@
     <section class="section" id="noticias">
         <div class="kicker">NOTICIAS</div>
         <h2 class="sec-heading">Últimas Noticias</h2>
+        
