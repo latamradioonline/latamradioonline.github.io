@@ -1,2 +1,42 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Administración | LATAM Radio Online</title><link rel="stylesheet" href="site.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="admin.js" defer></script></head><body><header class="site-header"><a class="brand" href="index.html"><span class="brand-icon">((o))</span><span><strong>LATAM</strong><small>ADMINISTRACIÓN</small></span></a><a class="button outline" href="index.html">Volver al sitio</a></header><main class="container section"><p class="kicker">ADMIN</p><h1>Gestiona tu sitio</h1><p>Configura enlaces, transmisión y redes sociales. Los cambios se publican en el sitio al guardar.</p><form id="settings-form" class="admin-form" hidden><label>URL de radio en vivo<input name="stream_url" type="url" placeholder="https://..." ></label><label>URL para Donar<input name="donate_url" type="url" placeholder="https://..." ></label><label>URL de Streaming<input name="streaming_url" type="url" placeholder="https://..." ></label><label>URL de Podcast<input name="podcast_url" type="url" placeholder="https://..." ></label><label>URL de Playlists<input name="playlist_url" type="url" placeholder="https://..." ></label><label>URL de Programación<input name="schedule_url" type="url" placeholder="https://..." ></label><h2>Redes sociales</h2><p>Escribe el nombre visible y la URL de cada enlace. Deja ambos campos vacíos para no mostrarlo.</p><div id="social-editor"></div><button type="button" class="button outline admin-add" id="add-social">＋ Añadir red social</button><button class="button red" type="submit">Guardar cambios</button><p id="admin-status" role="status"></p></form><section id="admin-denied" class="featured-card featured-body"><h2>Acceso restringido</h2><p>Inicia sesión con una cuenta autorizada como administradora para gestionar la configuración.</p><a class="button red" href="index.html">Ir al sitio e iniciar sesión</a></section></main></body></html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Panel privado de LATAM Radio Online">
+  <title>Panel de Administración | LATAM Radio Online</title>
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js" defer></script>
+</head>
+<body class="admin-page">
+  <header class="site-header admin-header">
+    <a class="brand" href="index.html"><span class="brand-icon">((o))</span><span><strong>LATAM</strong><small>RADIO ONLINE</small></span></a>
+    <a class="button outline" href="index.html">Ver sitio público</a>
+  </header>
+  <main class="admin-main container">
+    <section class="admin-intro"><p class="kicker">ADMINISTRACIÓN PRIVADA</p><h1>Panel de Administración</h1><p>Gestiona el contenido que verán los oyentes en LATAM Radio Online.</p></section>
+    <section id="admin-login" class="admin-panel login-panel">
+      <h2>Iniciar sesión</h2><p>Acceso exclusivo para la cuenta administradora.</p>
+      <form id="login-form" class="admin-form"><label>Correo electrónico<input name="email" type="email" autocomplete="username" required></label><label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label><button class="button admin-primary" type="submit">Entrar al panel</button><p id="login-status" class="admin-status" role="status"></p></form>
+    </section>
+    <div id="admin-workspace" hidden>
+      <nav class="admin-tabs" aria-label="Secciones de administración">
+        <a href="#estadisticas" data-tab="stats">▥ <span>Estadísticas</span></a>
+        <a href="#noticias" data-tab="news">▤ <span>Noticias</span></a>
+        <a href="#webradio" data-tab="radio">◉ <span>WebRadio</span></a>
+        <a href="#streaming" data-tab="streaming">▣ <span>Streaming</span></a>
+        <a href="#podcast" data-tab="podcast">♬ <span>Podcast</span></a>
+        <a href="#social" data-tab="social">↗ <span>Social</span></a>
+        <a href="#newsletter" data-tab="newsletter">✉ <span>Newsletter</span></a>
+        <a href="#playlists" data-tab="playlists">♫ <span>Playlists</span></a>
+        <a href="#programacion" data-tab="schedule">▦ <span>Programación</span></a>
+        <button type="button" id="admin-signout" class="admin-tab-logout">⇥ <span>Salir</span></button>
+      </nav>
+      <section id="admin-content" class="admin-panel" aria-live="polite"></section>
+    </div>
+  </main>
+  <dialog id="content-dialog" class="admin-dialog"><form id="content-form" method="dialog"><button type="button" class="admin-dialog-close" aria-label="Cerrar">×</button><div id="dialog-fields"></div><div class="admin-dialog-actions"><button type="button" class="button outline" id="cancel-edit">Cancelar</button><button type="submit" class="button admin-primary">Guardar</button></div><p id="dialog-status" class="admin-status" role="status"></p></form></dialog>
+</body>
+</html>
