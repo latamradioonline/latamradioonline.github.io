@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATAM Radio | La Voz de Abya Yala</title>
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        :root {
+            --bg-dark: #0e1116;
+            --bg-card: #161b22;
+            --accent-red: #b81d24;
+            --accent-gold: #d4af37;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border: #30363d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+
+        /* HEADER & NAVIGATION */
+        header { background: var(--bg-card); border-bottom: 2px solid var(--accent-red); padding: 16px 20px; position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); }
+        .brand-badge { background: var(--accent-red); color: white; font-weight: 800; padding: 6px 12px; border-radius: 6px; letter-spacing: 1px; }
+        .brand h1 { font-size: 1.35rem; letter-spacing: 0.5px; }
+        nav { display: flex; gap: 18px; align-items: center; }
+        nav a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--accent-gold); }
+        .btn-redaccion { background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+
+        /* PLAYER LIVE BAR */
+        .radio-banner { background: linear-gradient(90deg, #1b0b0c, #161b22); border-bottom: 1px solid var(--border); padding: 18px 20px; }
+        .radio-box { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+        .live-status { display: flex; align-items: center; gap: 10px; }
+        .dot-live { width: 12px; height: 12px; background: #ff2a2a; border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
+        .play-btn { background: var(--accent-red); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+        .play-btn:hover { background: #96161c; }
+
+        /* MAIN CONTENT */
+        main { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .section-title { font-size: 1.4rem; border-left: 4px solid var(--accent-gold); padding-left: 12px; margin-bottom: 22px; }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 22px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+        .card-img { width: 100%; height: 180px; object-fit: cover; background: #21262d; }
+        .card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+        .card-cat { color: var(--accent-gold); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .card-title { font-size: 1.15rem; margin-bottom: 10px; color: var(--text-main); }
+        .card-summary { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; flex: 1; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 12px; }
+        .read-more { color: var(--accent-gold); background: none; border: none; font-weight: bold; cursor: pointer; }
+
+        /* MODAL ARTICOLO COMPLETO */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; padding: 20px; overflow-y: auto; }
+        .modal-content { background: var(--bg-card); max-width: 750px; margin: 40px auto; padding: 28px; border-radius: 14px; border: 1px solid var(--border); position: relative; }
+        .close-modal { position: absolute; top: 18px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+
+        footer { text-align: center; padding: 30px 20px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand">
+                <span class="brand-badge">LATAM</span>
+                <h1>LATAM Radio</h1>
+            </a>
+            <nav>
+                <a href="#noticias">Noticias</a>
+                <a href="#programacion">Programación</a>
+                <a href="scrivi.html" class="btn-redaccion">Panel Redacción</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="radio-banner">
+        <div class="radio-box">
+            <div class="live-status">
+                <span class="dot-live"></span>
+                <div>
+                    <strong>SEÑAL EN VIVO — ABYA YALA</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted);" id="stream-status">Transmisión independiente y antiimperialista</p>
+                </div>
+            </div>
+            <div>
+                <button class="play-btn" id="toggle-radio" onclick="toggleRadio()">▶ Escuchar en Vivo</button>
+                <audio id="radio-player" preload="none">
+                    <!-- Sostituisci con il link diretto del tuo stream audio (.mp3 / .aac / Icecast) -->
+                    <source src="INSERISCI_QUI_LINK_STREAMING_AUDIO" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </section>
+
+    <main id="noticias">
+        <h2 class="section-title">Últimos Reportajes y Análisis</h2>
+        <div class="articles-grid" id="articles-container">
+            <p style="color:var(--text-muted);">Cargando despachos desde el servidor...</p>
+        </div>
+    </main>
+
+    <!-- MODAL PER LEGGERE L'ARTICOLO INTEGRALE -->
+    <div class="modal" id="article-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <div id="modal-cat" class="card-cat"></div>
+            <h2 id="modal-title" style="margin-bottom:12px;"></h2>
+            <p id="modal-meta" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:20px;"></p>
+            <div id="modal-body" style="white-space:pre-line; font-size:1rem;"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>LATAM Radio</strong> — Comunicación libre, soberana y decolonial desde Abya Yala.</p>
+        <p style="margin-top:6px;">Código abierto bajo licencia GNU GPLv3 • Base de datos independiente en Supabase.</p>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = "https://supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_awIlyqKMt7XGTapFfgqy2Q_lP4guXt2";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let isPlaying = false;
+        let loadedArticles = [];
+
+        function toggleRadio() {
+            const player = document.getElementById('radio-player');
+            const btn = document.getElementById('toggle-radio');
+            const status = document.getElementById('stream-status');
+
+            if (!isPlaying) {
+                player.play().then(() => {
+                    isPlaying = true;
+                    btn.innerText = "⏸ Pausar Señal";
+                    status.innerText = "Conectado en directo";
+                }).catch(() => {
+                    alert("Configura primero la URL real del streaming audio en el código.");
+                });
+            } else {
+                player.pause();
+                isPlaying = false;
+                btn.innerText = "▶ Escuchar en Vivo";
+                status.innerText = "Señal en pausa";
+            }
+        }
+
+        async function loadArticles() {
+            const container = document.getElementById('articles-container');
+            const { data, error } = await supabase
+                .from('latam_articles')
+                .select('*')
+                .eq('is_published', true)
+                .order('created_at', { ascending: false });
+
+            if (error || !data || data.length === 0) {
+                loadedArticles = [{
+                    id: 'welcome',
+                    category: 'Editorial',
+                    title: 'Nace la nueva señal digital de LATAM Radio',
+                    summary: 'Un espacio de información libre, sin censura algorítmica ni dependencia de corporaciones tecnológicas.',
+                    content: 'Bienvenidos a la nueva plataforma independiente de LATAM Radio.\n\nDesde aquí transmitiremos análisis geopolítico, cultura popular y las voces de los pueblos de Abya Yala y el Sur Global, respaldados por una infraestructura propia y descentralizada.',
+                    author: 'Redacción Central',
+                    created_at: new Date().toISOString()
+                }];
+            } else {
+                loadedArticles = data;
+            }
+
+            container.innerHTML = loadedArticles.map((art, index) => `
+                <article class="card">
+                    ${art.image_url ? `<img src="${art.image_url}" alt="${art.title}" class="card-img">` : ''}
+                    <div class="card-body">
+                        <span class="card-cat">${art.category}</span>
