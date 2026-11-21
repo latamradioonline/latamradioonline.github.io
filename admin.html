@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="admin.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="admin.js" defer></script>
+  <script src="admin-media.js" defer></script>
 </head>
 <body class="admin-page">
   <header class="site-header admin-header">
@@ -19,7 +20,12 @@
     <section class="admin-intro"><p class="kicker">ADMINISTRACIÓN PRIVADA</p><h1>Panel de Administración</h1><p>Gestiona el contenido que verán los oyentes en LATAM Radio Online.</p></section>
     <section id="admin-login" class="admin-panel login-panel">
       <h2>Iniciar sesión</h2><p>Acceso exclusivo para la cuenta administradora.</p>
-      <form id="login-form" class="admin-form"><label>Correo electrónico<input name="email" type="email" autocomplete="username" required></label><label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label><button class="button admin-primary" type="submit">Entrar al panel</button><p id="login-status" class="admin-status" role="status"></p></form>
+      <form id="login-form" class="admin-form">
+        <label>Correo electrónico<input name="email" type="email" autocomplete="username" required></label>
+        <label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit" class="button red">Iniciar sesión</button>
+        <p id="login-status" class="admin-status" role="status"></p>
+      </form>
     </section>
     <div id="admin-workspace" hidden>
       <nav class="admin-tabs" aria-label="Secciones de administración">
@@ -37,6 +43,16 @@
       <section id="admin-content" class="admin-panel" aria-live="polite"></section>
     </div>
   </main>
-  <dialog id="content-dialog" class="admin-dialog"><form id="content-form" method="dialog"><button type="button" class="admin-dialog-close" aria-label="Cerrar">×</button><div id="dialog-fields"></div><div class="admin-dialog-actions"><button type="button" class="button outline" id="cancel-edit">Cancelar</button><button type="submit" class="button admin-primary">Guardar</button></div><p id="dialog-status" class="admin-status" role="status"></p></form></dialog>
+  <dialog id="content-dialog" class="admin-dialog">
+    <form id="content-form" method="dialog">
+      <button type="button" class="admin-dialog-close" aria-label="Cerrar">×</button>
+      <div id="dialog-fields"></div>
+      <p id="dialog-status" class="admin-status" role="status"></p>
+      <div class="admin-dialog-actions">
+        <button type="button" id="cancel-edit" class="button outline">Cancelar</button>
+        <button type="submit" id="save-content" class="button red">Guardar</button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>
